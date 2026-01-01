@@ -1,2 +1,0 @@
-# sajidjavaid
-Personal Portfolio
