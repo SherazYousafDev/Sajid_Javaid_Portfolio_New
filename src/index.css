@@ -1,18 +1,111 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
+@import "tailwindcss";
+
 @theme {
-  --color-bg: #080c17;
-  --color-text: #f5f5f5;
-  --color-primary: #3949ab;
+  /* The Base: Deep Gunmetal Charcoal */
+  --color-bg: #222831;
+
+  /* The Text: Soft silver (Easy on the eyes for long reading) */
+  --color-text: #bdc3c7;
+
+
+  
+
+  /* The Brand: High-energy Teal (Your primary choice) */
+  --color-primary: #00adb5;
+
+  /* The Support: Muted Slate (For labels, borders, and dates) */
+  --color-secondary: #393e46;
+
+  /* The Surface: Slightly lighter than bg for a "lifted" effect */
+  --color-card: #2c3440;
 }
 
-@import "tailwindcss";
+/* @theme {
+  --color-bg: #111827;      
+  --color-card: #1f2937;    
+  --color-text: #9ca3af;   
+  --color-primary: #10b981;  
+  --color-secondary: #4b5563; 
+} */
+
+/* @theme {
+  --color-bg: #061e1b;      
+  --color-card: #102a27;   
+  --color-text: #d1d5db;    
+  --color-primary: #fbbf24;  
+  --color-secondary: #334155; 
+} */
+
+/* @theme {
+  --color-bg: #1a1513;      
+  --color-card: #28211e;    
+  --color-text: #e5e7eb;    
+  --color-primary: #a78bfa;  
+  --color-secondary: #78350f; 
+} */
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
 
   @apply bg-bg text-gray-200 antialiased;
 }
+
+/* 
+colors:
+1- Steel Blue = {
+Background:     #0B1220
+Surface:        #121A2B
+Border:         #1E293B
+Primary Text:   #E2E8F0
+Muted Text:     #94A3B8
+Accent:         #38BDF8
+}
+
+
+
+2- Navy Slate = {
+Background:     #0F172A   (Deep navy – not black)
+Surface/Card:   #111827
+Border/Divider: #1F2937
+Primary Text:   #E5E7EB
+Muted Text:     #9CA3AF
+Accent:         #3B82F6
+}
+
+
+3- Midnight Blue = {
+Background:     #0C1222
+Surface:        #141B2D
+Border:         #202A44
+Primary Text:   #F1F5F9
+Muted Text:     #A1A1AA
+Accent:         #6366F1
+}
+
+
+4- Deep Evergreen = {
+Background:     #0F1E17
+Surface:        #162C22
+Border:         #25473A
+Primary Text:   #ECFDF5
+Muted Text:     #A7C7B8
+Accent:         #34D399
+
+}
+
+
+5- Forest Slate = {
+Background:     #0D1B1E
+Surface:        #132A2E
+Border:         #1F3A3F
+Primary Text:   #E6F1F1
+Muted Text:     #9FB6B9
+Accent:         #2DD4BF
+
+}
+*/
 
 /* Smooth scrolling for the whole site */
 html {

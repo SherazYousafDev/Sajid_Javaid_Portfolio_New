@@ -81,7 +81,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Header - Glass effect */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0f1d]/80 backdrop-blur-md border-b border-white/5 z-[60] flex items-center justify-between px-6">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0f1d]/80 backdrop-blur-md border-b border-white/5 z-60 flex items-center justify-between px-6">
         <span className="font-bold text-white tracking-tighter">SJ.</span>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -94,7 +94,7 @@ const Sidebar = () => {
       <aside
         className={`
         fixed inset-y-0 left-0 z-50 w-72 bg-[#0a0f1d] text-white p-8 flex flex-col 
-        border-r border-white/[0.05] transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
+        border-r border-white/5 transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
         ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
       `}
       >

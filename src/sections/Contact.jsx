@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MessageSquare, Mail, Phone, MapPin, Send } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Contact = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+    AOS.refresh();
+  }, []);
+
   return (
     <section id="contact" className="py-20 scroll-mt-20">
       {/* Section Header */}
-      <div className="flex items-center gap-4 mb-16">
+      <div
+        className="flex items-center gap-4 mb-16"
+        data-aos="fade-right"
+        data-aos-delay="100"
+      >
         <div className="p-3 bg-indigo-600/10 rounded-xl text-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
           <MessageSquare size={24} />
         </div>
@@ -19,7 +30,7 @@ const Contact = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left Side: Direct Contact Info */}
-        <div className="space-y-8">
+        <div className="space-y-8" data-aos="fade-up" data-aos-delay="200">
           <h4 className="text-xl font-bold text-white mb-4">
             Let's discuss your next{" "}
             <span className="text-indigo-500">Fintech</span> project.
@@ -30,7 +41,11 @@ const Contact = () => {
           </p>
 
           <div className="space-y-6">
-            <div className="flex items-center gap-4 group">
+            <div
+              className="flex items-center gap-4 group"
+              data-aos="fade-right"
+              data-aos-delay="300"
+            >
               <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-indigo-400 group-hover:border-indigo-500/50 transition-all">
                 <Mail size={20} />
               </div>
@@ -44,7 +59,11 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 group">
+            <div
+              className="flex items-center gap-4 group"
+              data-aos="fade-right"
+              data-aos-delay="400"
+            >
               <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-indigo-400 group-hover:border-indigo-500/50 transition-all">
                 <Phone size={20} />
               </div>
@@ -56,7 +75,11 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 group">
+            <div
+              className="flex items-center gap-4 group"
+              data-aos="fade-right"
+              data-aos-delay="500"
+            >
               <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl text-indigo-400 group-hover:border-indigo-500/50 transition-all">
                 <MapPin size={20} />
               </div>
@@ -71,7 +94,11 @@ const Contact = () => {
         </div>
 
         {/* Right Side: Contact Form */}
-        <div className="bg-[#0f172a]/30 backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-xl">
+        <div
+          className="bg-[#0f172a]/30 backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-xl"
+          data-aos="fade-left"
+          data-aos-delay="200"
+        >
           <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">

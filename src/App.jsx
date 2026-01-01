@@ -8,7 +8,20 @@ import Education from "./sections/Education";
 import Contact from "./sections/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 const App = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen ">
       <Sidebar />
@@ -17,8 +30,8 @@ const App = () => {
         <div className="max-w-5xl mx-auto px-6 py-8 lg:px-16 lg:py-12">
           <About />
           <Skills />
-          <Experience />
           <Projects />
+          <Experience />
           <Education />
           <Contact />
         </div>
