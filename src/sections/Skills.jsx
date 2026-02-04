@@ -8,29 +8,38 @@ import {
   Code,
   Activity,
   PenTool,
+  
 } from "lucide-react";
 
 /* =======================
-   Skill Group Component
+    Skill Group Component
 ======================= */
 const SkillGroup = ({ title, skills, icon: Icon, delay = 0 }) => (
   <div
     data-aos="fade-up"
     data-aos-delay={delay}
-    className="group bg-card backdrop-blur-md p-8 rounded-2xl border border-secondary hover:border-primary/50 transition-all duration-500 hover:scale-[1.03] cursor-pointer"
+    className="group relative bg-white/[0.03] backdrop-blur-xl p-7 rounded-3xl border border-white/10 hover:border-primary/40 transition-all duration-500 overflow-hidden"
   >
-    <div className="flex items-center gap-4 mb-6">
-      <div className="p-3 rounded-xl bg-bg text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-        <Icon size={20} />
+    {/* Decorative background glow on hover */}
+    <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+    <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center gap-4">
+        <div className="relative p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg shadow-primary/20">
+          <Icon size={22} />
+        </div>
+        <h4 className="font-extrabold text-white tracking-tight text-lg group-hover:text-primary transition-colors">
+          {title}
+        </h4>
       </div>
-      <h4 className="font-bold text-primary tracking-tight text-lg">{title}</h4>
+      
     </div>
 
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2.5">
       {skills.map((s, i) => (
         <span
           key={i}
-          className="px-3 py-1 bg-card text-text text-[11px] font-bold uppercase tracking-wider rounded-lg border border-slate-800 group-hover:border-slate-700 group-hover:text-primary transition-all"
+          className="px-3.5 py-1.5 bg-white/5 text-white/70 text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/5 group-hover:border-primary/20 group-hover:text-white transition-all duration-300 hover:bg-primary/10"
         >
           {s}
         </span>
@@ -40,47 +49,49 @@ const SkillGroup = ({ title, skills, icon: Icon, delay = 0 }) => (
 );
 
 /* =======================
-   Skills Section
+    Skills Section
 ======================= */
 const Skills = () => {
   useEffect(() => {
-    AOS.refresh(); // refresh for mapped components
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <section
       id="skills"
-      className="py-20 scroll-mt-20 border-b border-secondary"
+      className="py-24 md:py-32 scroll-mt-20 border-b border-white/5 relative"
     >
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
+
       {/* Section Header */}
-      <div className="flex items-center gap-4 mb-16" data-aos="fade-right">
-        <div className="p-3 bg-bg rounded-xl text-primary  shadow-[0_0_15px_rgba(99,102,241,0.1)]">
-          <Zap size={24} />
+      <div className="max-w-3xl mb-16" data-aos="fade-right">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-[1px] bg-primary"></div>
+          <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px]">
+            Technical Arsenal
+          </span>
         </div>
-        <div>
-          <h2 className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-1">
-            Expertise & Stack
-          </h2>
-          <h3 className="text-2xl font-bold text-white">Technical Skills</h3>
-        </div>
+        <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
+          Expertise &{" "}
+          <span className="italic font-light text-primary">Tech Stack.</span>
+        </h3>
       </div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <SkillGroup
-          title="Project Management"
+          title="Project Mgmt"
           icon={Briefcase}
           delay={0}
           skills={[
             "JIRA",
             "MS Project",
             "HP ALM",
-            "ASANA",
+            "Asana",
             "Monday",
-            "Favro",
             "Trello",
             "ClickUp",
-            "MS Excel",
           ]}
         />
 
@@ -89,32 +100,28 @@ const Skills = () => {
           icon={Database}
           delay={100}
           skills={[
-            "MS SQL Server 2019",
+            "SQL Server",
             "PostgreSQL",
-            "MS Access",
             "SQLite",
             "Table Plus",
             "MySQL",
             "LINQ",
-            "Entity Framework",
+            "EF Core",
           ]}
         />
 
         <SkillGroup
-          title="QA Test / Automation"
+          title="QA & Automation"
           icon={Activity}
           delay={200}
           skills={[
             "Cypress",
             "Selenium",
             "Appium",
-            "BrowserStack",
             "Postman",
             "JMeter",
             "SoapUI",
-            "Vysor",
             "Swagger",
-            "SonarQube",
           ]}
         />
 
@@ -123,49 +130,43 @@ const Skills = () => {
           icon={Code}
           delay={300}
           skills={[
-            ".Net Framework",
-            "VB.Net",
+            ".Net",
             "C#",
+            "VB.Net",
             "ASP.NET MVC",
             "Microservices",
             "Web API",
-            "JavaScript",
-            "CSS",
-            "JAVA (Basic)",
-            "Python (Basic)",
-            "React JS (Familiar)",
+            "React JS",
           ]}
         />
 
         <SkillGroup
-          title="CI/CD"
+          title="DevOps & CI/CD"
           icon={Terminal}
           delay={400}
           skills={[
-            "SonarQube",
             "Jenkins",
+            "SonarQube",
             "Maven",
             "Nuget",
             "NUnit",
             "TFS",
-            "GIT",
+            "Git",
           ]}
         />
 
         <SkillGroup
-          title="Designs, Prototyping & Others"
+          title="Design & Tools"
           icon={PenTool}
           delay={500}
           skills={[
             "Figma",
             "Adobe XD",
             "Miro",
-            "DevExpress Tools",
+            "DevExpress",
             "Github",
             "VS Code",
-            "R Studio",
             "AWS S3",
-            "DAON (OCR)",
           ]}
         />
       </div>

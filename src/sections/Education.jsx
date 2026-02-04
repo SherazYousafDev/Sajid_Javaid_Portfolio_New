@@ -1,168 +1,126 @@
-import React, { useState, useEffect } from "react";
-import {
-  GraduationCap,
-  Award,
-  CheckCircle,
-  School,
-  Calendar,
-} from "lucide-react";
+import React, { useEffect } from "react";
+import { School, Calendar, Award } from "lucide-react";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Make sure this is imported
-
-const EducationCard = ({ title, school, date, delay = 0 }) => (
-  <div
-    className="group relative pl-8 border-l-2 border-secondary hover:border-primary transition-all duration-500 py-4 mb-4 bg-white/[0.02] rounded-r-2xl pr-6"
-    data-aos="fade-up"
-    data-aos-delay={delay}
-  >
-    <div className="absolute -left-[9px] top-6 w-4 h-4 bg-bg/80 border-2 border-secondary rounded-full group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(99,102,241,0.5)] transition-all"></div>
-    <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-      <h4 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">
-        {title}
-      </h4>
-      <span className="flex items-center gap-2 text-indigo-400 text-[10px] font-bold bg-primary/10 border border-primary/20 px-3 py-1 rounded-full uppercase tracking-widest">
-        <Calendar size={12} /> {date}
-      </span>
-    </div>
-    <p className="text-text font-semibold mb-1 flex items-center gap-2">
-      <School size={16} className="text-text" /> {school}
-    </p>
-  </div>
-);
-
-const CertificateItem = ({ title, issuer, certId, delay = 0 }) => (
-  <div
-    className="flex flex-col p-5 bg-bg/40 border border-secondary rounded-2xl hover:border-primary/50 hover:bg-slate-800/40 transition-all group h-full"
-    data-aos="fade-up"
-    data-aos-delay={delay}
-  >
-    <div className="p-3 bg-bg/50 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-4">
-      <CheckCircle size={20} />
-    </div>
-    <h5 className="text-sm font-bold text-white leading-tight mb-2">{title}</h5>
-    <p className="text-xs text-text font-medium mt-auto italic">
-      {issuer}
-    </p>
-    {certId && (
-      <span className="text-[9px] font-mono text-primary/50 mt-2 uppercase">
-        ID: {certId}
-      </span>
-    )}
-  </div>
-);
 
 const Education = () => {
-  const [activeTab, setActiveTab] = useState("education");
-
   useEffect(() => {
-    AOS.init({ duration: 800, once: true }); // Initialize AOS
     AOS.refresh();
   }, []);
+
+  const eduData = [
+    {
+      title: "MS in Computer Science",
+      school: "National College of Business Administration & Economics",
+      date: "2020 - 2022",
+      description: "Specialized in Software Engineering & Data Systems.",
+    },
+    {
+      title: "Master's in Information Technology",
+      school: "Punjab University (PUCIT)",
+      date: "2010 - 2012",
+      description: "Focused on Enterprise Systems and IT Infrastructure.",
+    },
+    {
+      title: "Bachelors of Commerce",
+      school: "University of Punjab",
+      date: "2008 - 2010",
+      description: "Foundation in Business Management & Economics.",
+    },
+  ];
 
   return (
     <section
       id="education"
-      className="py-24 scroll-mt-20 border-b border-secondary"
+      className="py-24 relative overflow-hidden"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center text-center mb-16">
-        <h2 className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-3">
-          Qualifications
+      <div className="max-w-6xl mx-auto px-6 mb-20 text-center">
+        <h2 className="text-primary font-bold tracking-[0.4em] uppercase text-[10px] mb-3">
+          Academic Foundation
         </h2>
-        <h3 className="text-3xl font-bold text-white mb-10">
-          Academic & Professional
+        <h3 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          Education
         </h3>
-
-        {/* Premium Tab Switcher */}
-        <div className="flex p-1.5 bg-bg/80 backdrop-blur-md rounded-2xl border border-secondary w-full max-w-md shadow-2xl">
-          <button
-            onClick={() => setActiveTab("education")}
-            className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
-              activeTab === "education"
-                ? "bg-primary text-white shadow-lg shadow-indigo-500/20"
-                : "text-slate-400 hover:text-slate-200 hover:bg-white/5"
-            }`}
-          >
-            <GraduationCap size={18} /> Education
-          </button>
-          <button
-            onClick={() => setActiveTab("certificates")}
-            className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
-              activeTab === "certificates"
-                ? "bg-primary text-white shadow-lg shadow-indigo-500/20"
-                : "text-slate-400 hover:text-primary hover:bg-bg/5"
-            }`}
-          >
-            <Award size={18} /> Certificates
-          </button>
-        </div>
+        <div className="h-1 w-12 bg-primary mx-auto mt-6 rounded-full"></div>
       </div>
 
-      {/* Tab Content */}
-      <div className="max-w-6xl mx-auto">
-        {activeTab === "education" ? (
-          <div className="max-w-3xl mx-auto space-y-4">
-            <EducationCard
-              title="MS in Computer Science"
-              school="National College of Business Administration & Economics"
-              date="2020 - 2022"
-              delay={100}
-            />
-            <EducationCard
-              title="Master's in Information Technology"
-              school="Punjab University College of Information Technology"
-              date="2010 - 2012"
-              delay={200}
-            />
-            <EducationCard
-              title="Bachelors of Commerce"
-              school="University of Punjab"
-              date="2008 - 2010"
-              delay={300}
-            />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <CertificateItem
-              title="PMI – Generative AI For PMs"
-              issuer="Project Management Institute"
-              delay={100}
-            />
-            <CertificateItem
-              title="Microsoft Certified Partner (MCP)"
-              issuer="Microsoft"
-              delay={200}
-            />
-            <CertificateItem
-              title="HTML5 with JS & CSS3 Specialist"
-              issuer="Microsoft"
-              certId="E124-0240"
-              delay={300}
-            />
-            <CertificateItem
-              title="Python Programming"
-              issuer="Test Automation University"
-              certId="2019c625"
-              delay={400}
-            />
-            <CertificateItem
-              title="Introduction to Cypress"
-              issuer="Test Automation University"
-              certId="c2797374"
-              delay={500}
-            />
-            <CertificateItem
-              title="Certified .Net Specialist"
-              issuer="EVS Learning Institute"
-              delay={600}
-            />
-            <CertificateItem
-              title="Web Engineering (PHP)"
-              issuer="University of Punjab"
-              delay={700}
-            />
-          </div>
-        )}
+      <div className="relative max-w-6xl mx-auto px-6">
+        {/* Vertical Line - Perfectly Centered */}
+        <div className="absolute left-[31px] lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-secondary/40 to-transparent"></div>
+
+        <div className="space-y-12">
+          {eduData.map((edu, index) => (
+            <div
+              key={index}
+              className="relative flex items-center justify-between group"
+            >
+              {/* Desktop Left Side */}
+              <div className="hidden lg:flex w-[45%] justify-end text-right">
+                {index % 2 === 0 && (
+                  <div className="pr-10" data-aos="fade-right">
+                    <span className="text-primary font-bold text-sm tracking-widest block mb-2">
+                      {edu.date}
+                    </span>
+                    <h4 className="text-2xl font-bold text-white mb-2">
+                      {edu.title}
+                    </h4>
+                    <p className="text-slate-400 flex items-center justify-end gap-2">
+                      {edu.school}{" "}
+                      <School size={18} className="text-primary/60" />
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Central Chronology Circle */}
+              <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 flex items-center justify-center z-10">
+                <div className="w-4 h-4 rounded-full bg-[#222831] border-2 border-secondary group-hover:border-primary group-hover:scale-125 transition-all duration-500 shadow-[0_0_10px_rgba(0,0,0,0.5)]"></div>
+              </div>
+
+              {/* Desktop Right Side / Mobile Full Width */}
+              <div className="w-full lg:w-[45%] pl-12 lg:pl-10">
+                {(index % 2 !== 0 || window.innerWidth < 1024) && (
+                  <div className="lg:text-left" data-aos="fade-left">
+                    {/* Mobile Date Header (Hidden on Desktop) */}
+                    <span className="lg:hidden text-primary font-bold text-xs tracking-widest block mb-1">
+                      {edu.date}
+                    </span>
+
+                    <h4 className="text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                      {edu.title}
+                    </h4>
+
+                    {/* Only show content here for right-aligned items on desktop or ALL items on mobile */}
+                    {index % 2 !== 0 ? (
+                      <p className="text-slate-400 flex items-center gap-2 font-medium">
+                        <School size={18} className="text-primary/60" />{" "}
+                        {edu.school}
+                      </p>
+                    ) : (
+                      <div className="lg:hidden">
+                        <p className="text-slate-400 flex items-center gap-2 font-medium">
+                          <School size={18} className="text-primary/60" />{" "}
+                          {edu.school}
+                        </p>
+                      </div>
+                    )}
+
+                    <p className="mt-3 text-sm text-slate-500 leading-relaxed italic border-l border-primary/20 pl-4">
+                      {edu.description}
+                    </p>
+                  </div>
+                )}
+
+                {/* Desktop logic for the "Right-Side gap fill" for Left-aligned items */}
+                {index % 2 === 0 && (
+                  <div className="hidden lg:block">
+                    {/* Empty space to keep grid stable */}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

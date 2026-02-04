@@ -11,6 +11,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Certifications from "./sections/Certifications";
+import SkillsSlider from "./components/SkillsSlider";
 
 const App = () => {
   useEffect(() => {
@@ -25,13 +27,15 @@ const App = () => {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen ">
       <Sidebar />
-      <main className="flex-1 lg:ml-60">
+      <main className="flex-1 lg:ml-60 overflow-x-hidden">
         <Hero />
+        <SkillsSlider />
         <div className="max-w-5xl mx-auto px-6 py-8 lg:px-16 lg:py-12">
           <About />
           <Skills />
           <Projects />
           <Experience />
+          <Certifications />
           <Education />
           <Contact />
         </div>

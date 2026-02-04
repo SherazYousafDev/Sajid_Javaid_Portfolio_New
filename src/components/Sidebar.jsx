@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Mail,
   Phone,
@@ -7,188 +7,222 @@ import {
   Code,
   Briefcase,
   Award,
-  GraduationCap,
   MessageSquare,
   Menu,
   X,
   Linkedin,
+  School,
 } from "lucide-react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
 
-  // Track which section is in view to highlight the nav item
+  const navItems = useMemo(
+    () => [
+      { label: "About", icon: <User size={18} />, href: "#about", id: "about" },
+      {
+        label: "Skills",
+        icon: <Code size={18} />,
+        href: "#skills",
+        id: "skills",
+      },
+      {
+        label: "Projects",
+        icon: <Award size={18} />,
+        href: "#projects",
+        id: "projects",
+      },
+      {
+        label: "Experience",
+        icon: <Briefcase size={18} />,
+        href: "#experience",
+        id: "experience",
+      },
+      {
+        label: "Certificates",
+        icon: <Award size={18} />,
+        href: "#certificates",
+        id: "certificates",
+      },
+      {
+        label: "Education",
+        icon: <School size={18} />,
+        href: "#education",
+        id: "education",
+      },
+      {
+        label: "Contact",
+        icon: <MessageSquare size={18} />,
+        href: "#contact",
+        id: "contact",
+      },
+    ],
+    [],
+  );
+
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        "about",
-        "skills",
-        "experience",
-        "projects",
-        "education",
-        "contact",
-      ];
-      const current = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top >= 0 && rect.top <= 300;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      threshold: 0,
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
 
-  const navItems = [
-    { label: "About", icon: <User size={18} />, href: "#about", id: "about" },
-    {
-      label: "Skills",
-      icon: <Code size={18} />,
-      href: "#skills",
-      id: "skills",
-    },
-    {
-      label: "Experience",
-      icon: <Briefcase size={18} />,
-      href: "#experience",
-      id: "experience",
-    },
-    {
-      label: "Projects",
-      icon: <Award size={18} />,
-      href: "#projects",
-      id: "projects",
-    },
-    {
-      label: "Education",
-      icon: <GraduationCap size={18} />,
-      href: "#education",
-      id: "education",
-    },
-    {
-      label: "Contact",
-      icon: <MessageSquare size={18} />,
-      href: "#contact",
-      id: "contact",
-    },
-  ];
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+    navItems.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [navItems]);
+
+  const ContactInfo = ({ icon: Icon, text, href }) => (
+    <div className="flex items-center gap-3 text-secondary hover:text-primary transition-colors cursor-pointer group/info">
+      <Icon
+        size={14}
+        className="shrink-0 group-hover/info:scale-110 transition-transform"
+      />
+      {href ? (
+        <a
+          href={href}
+          className="text-[10px] font-bold truncate tracking-wider"
+        >
+          {text}
+        </a>
+      ) : (
+        <span className="text-[10px] font-bold truncate tracking-wider">
+          {text}
+        </span>
+      )}
+    </div>
+  );
 
   return (
     <>
-      {/* Mobile Header - Glass effect */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0f1d]/80 backdrop-blur-md border-b border-white/5 z-60 flex items-center justify-between px-6">
-        <span className="font-bold text-white tracking-tighter">SJ.</span>
+      {/* Mobile Header - Swapped to bg-bg/80 */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-bg/80 backdrop-blur-xl border-b border-white/5 z-[60] flex items-center justify-between px-6">
+        <span className="font-black text-xl text-white tracking-tighter">
+          SJ<span className="text-primary">.</span>
+        </span>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-2 bg-indigo-600 text-white rounded-lg shadow-lg shadow-indigo-500/30"
+          className="p-2.5 bg-primary/10 text-primary rounded-xl border border-primary/20"
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </div>
+      </header>
 
+      {/* Main Sidebar - Swapped to bg-bg */}
       <aside
         className={`
-        fixed inset-y-0 left-0 z-50 w-72 bg-[#0a0f1d] text-white p-8 flex flex-col 
-        border-r border-white/5 transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
-        ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-      `}
+          fixed inset-y-0 left-0 z-50 w-72 bg-bg text-text p-6 flex flex-col 
+          border-r border-secondary/20 transition-all duration-500 ease-in-out
+          ${
+            isOpen
+              ? "translate-x-0 shadow-2xl shadow-primary/5"
+              : "-translate-x-full lg:translate-x-0"
+          }
+        `}
       >
-        {/* Brand Logo & Name */}
-        <div className="mb-10 group cursor-default">
-          <div className="relative inline-block mb-6">
-            <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center text-xl font-black shadow-[0_0_20px_rgba(79,70,229,0.3)] group-hover:scale-105 transition-transform">
-              SJ
+        <div className="mb-8 group">
+          <div className="relative inline-block mb-4">
+            <div className="hidden md:block h-16 w-16 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg shadow-primary/5 group-hover:rotate-3 transition-transform duration-300 ">
+              <img
+                src="/profile.webp"
+                alt="Sajid Javaid"
+                className="w-full h-full object-cover  transition-all duration-500"
+              />
             </div>
-            <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-emerald-500 border-2 border-[#0a0f1d] rounded-full"></div>
+            {/* Status Dot - Uses emerald but keep bg-bg for border */}
+            <span className="absolute -bottom-1 -right-1 h-4 w-4 bg-emerald-500 border-4 border-bg rounded-full animate-pulse"></span>
           </div>
 
-          <h1 className="text-xl font-extrabold tracking-tight leading-none text-white">
+          <h1 className="text-xl font-extrabold tracking-tight text-white leading-tight mt-8 md:mt-0">
             Ch Muhammad <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-              Sajid Javaid
-            </span>
+            <span className="text-primary">Sajid Javaid</span>
           </h1>
-          <p className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.25em] mt-3 flex items-center gap-2">
-            <span className="w-4 h-[1px] bg-slate-700"></span>
-            Fintech Expert
-          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <div className="h-[1px] w-4 bg-primary/50"></div>
+            <span className="text-secondary text-[9px] font-black uppercase tracking-[0.2em]">
+              Fintech Expert
+            </span>
+          </div>
         </div>
 
-        {/* Dynamic Navigation */}
-        <nav className="flex-1 space-y-1.5 overflow-y-hidden scrollbar-hide py-2">
+        <nav className="flex-1 flex flex-col space-y-1 overflow-visible">
           {navItems.map((item) => (
             <a
-              key={item.label}
+              key={item.id}
               href={item.href}
               onClick={() => setIsOpen(false)}
               className={`
-                group flex items-center gap-4 py-3 px-4 rounded-xl transition-all duration-300
+                group flex items-center gap-4 py-2.5 px-4 rounded-xl transition-all duration-300 border
                 ${
                   activeSection === item.id
-                    ? "bg-indigo-600/10 text-indigo-400 border border-indigo-500/20"
-                    : "text-slate-400 hover:text-slate-100 hover:bg-white/5 border border-transparent"
+                    ? "bg-primary/10 text-primary border-primary/30 shadow-[inset_0_0_10px_rgba(236,204,104,0.05)]"
+                    : "text-text/60 hover:text-white hover:bg-white/5 border-transparent"
                 }
               `}
             >
               <span
-                className={`${
+                className={`transition-colors duration-300 ${
                   activeSection === item.id
-                    ? "text-indigo-400"
-                    : "text-slate-500 group-hover:text-slate-300"
+                    ? "text-primary"
+                    : "group-hover:text-text"
                 }`}
               >
                 {item.icon}
               </span>
-              <span className="font-bold text-[13px] tracking-wide uppercase">
+              <span className="font-bold text-[11px] tracking-wide uppercase">
                 {item.label}
               </span>
-              {activeSection === item.id && (
-                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></div>
-              )}
+              <div
+                className={`ml-auto w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                  activeSection === item.id
+                    ? "bg-primary shadow-[0_0_12px_var(--color-primary)] scale-100 opacity-100"
+                    : "scale-0 opacity-0"
+                }`}
+              ></div>
             </a>
           ))}
         </nav>
 
-        {/* Premium Contact Card */}
-        <div className="mt-8 p-3 bg-gradient-to-b from-white/[0.03] to-transparent rounded-2xl border border-white/[0.05] space-y-4">
-          <div className="flex items-center gap-3 text-slate-400 hover:text-indigo-300 transition-colors cursor-default">
-            <Mail size={14} className="shrink-0" />
-            <span className="text-[10px] font-bold truncate">
-              sajid.javaid63@gmail.com
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-slate-400 hover:text-indigo-300 transition-colors cursor-default">
-            <Phone size={14} className="shrink-0" />
-            <span className="text-[10px] font-bold tracking-widest">
-              +92 333 7777230
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-slate-400 hover:text-indigo-300 transition-colors cursor-default">
-            <MapPin size={14} className="shrink-0" />
-            <span className="text-[10px] font-bold">Lahore, Pakistan</span>
-          </div>
-
+        {/* Contact Box - Swapped to bg-card for 'lifted' look */}
+        <div className="mt-6 p-4 bg-card/50 rounded-2xl border border-secondary/20 space-y-3">
+          <ContactInfo
+            icon={Mail}
+            text="sajid.javaid63@gmail.com"
+            href="mailto:sajid.javaid63@gmail.com"
+          />
+          <ContactInfo icon={Phone} text="+92 333 7777230" />
+          <ContactInfo icon={MapPin} text="Lahore, Pakistan" />
           <a
             href="https://linkedin.com"
             target="_blank"
-            className="flex items-center justify-center gap-2 w-full py-2 bg-slate-800/50 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-2 bg-primary text-bg rounded-lg text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all active:scale-95 mt-2 shadow-lg shadow-primary/10"
           >
             <Linkedin size={12} /> LinkedIn
           </a>
         </div>
       </aside>
 
-      {/* Modern Overlay */}
+      {/* Overlay - Swapped to bg-bg/60 */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 lg:hidden animate-in fade-in duration-300"
+          className="fixed inset-0 bg-bg/60 backdrop-blur-sm z-40 lg:hidden transition-all duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}

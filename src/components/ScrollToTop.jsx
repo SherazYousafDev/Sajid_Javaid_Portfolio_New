@@ -30,8 +30,8 @@ const ScrollToTop = () => {
       <button
         onClick={scrollToTop}
         className={`
-          p-3 rounded-xl bg-indigo-600/20 backdrop-blur-md border border-indigo-500/30 text-indigo-400
-          shadow-[0_0_20px_rgba(99,102,241,0.2)] hover:bg-indigo-600 hover:text-white 
+          p-3 rounded-xl bg-primary/20 backdrop-blur-md border border-primary/30 text-primary0
+          shadow-[0_0_20px_rgba(99,102,241,0.2)] hover:bg-primary hover:text-white 
           hover:shadow-[0_0_25px_rgba(99,102,241,0.5)] transition-all duration-500 group
           ${
             isVisible

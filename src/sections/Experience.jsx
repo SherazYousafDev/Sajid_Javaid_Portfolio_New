@@ -134,7 +134,7 @@ const Experience = () => {
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-16" data-aos="fade-right">
-        <div className="p-3 bg-bg border border-secondary rounded-xl text-primary">
+        <div className="p-3 bg-bg border-secondary rounded-xl text-primary">
           <Briefcase size={24} />
         </div>
         <div>

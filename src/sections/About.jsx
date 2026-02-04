@@ -15,7 +15,7 @@ const About = () => {
       <div className="max-w-3xl">
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-16" data-aos="fade-right">
-          <div className="p-3 bg-indigo-600/10 rounded-xl text-primary shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+          <div className="p-3 bg-bg/10 rounded-xl text-primary shadow-[0_0_15px_rgba(99,102,241,0.1)]">
             <User size={24} />
           </div>
           <div>
@@ -39,9 +39,9 @@ const About = () => {
         <div className="relative pl-8">
           {/* Gradient Accent Line */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-indigo-600 via-blue-500 to-transparent rounded-full"
+            className="absolute left-0 top-0 bottom-0 w-0.75 bg-linear-to-b from-[#00adb5] via-blue-300 to-transparent rounded-full"
             data-aos="fade-down"
-            data-aos-delay="150"
+            data-aos-delay="350"
           ></div>
 
           <p
@@ -61,7 +61,7 @@ const About = () => {
 
           <p
             className="text-lg text-text/50 leading-relaxed max-w-2xl"
-            data-aos="fade-right"
+            data-aos="fade-up"
             data-aos-delay="300"
           >
             Proficient in Agile methodologies with a focus on strategic
