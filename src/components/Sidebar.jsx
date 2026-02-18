@@ -209,7 +209,7 @@ const Sidebar = () => {
           <ContactInfo icon={Phone} text="+92 333 7777230" />
           <ContactInfo icon={MapPin} text="Lahore, Pakistan" />
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/sajid-javaid-4895b8146/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2 bg-primary text-bg rounded-lg text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all active:scale-95 mt-2 shadow-lg shadow-primary/10"
